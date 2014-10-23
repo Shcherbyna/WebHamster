@@ -1,0 +1,50 @@
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+
+import java.nio.charset.Charset;
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class Log {
+    int src_ip;
+    String uri;
+    int timeStamp;
+    int send_byte;
+    int received_byte;
+    double speed;
+
+    public  Log(int src_ip, String uri, int timeStamp, int send_byte, int received_byte, double speed){
+        this.src_ip = src_ip;
+        this.uri = uri;
+        this.timeStamp = timeStamp;
+        this.send_byte = send_byte;
+        this.received_byte = received_byte;
+        this.speed = speed;
+    }
+
+    public void setSrc_ip(int src_ip) {
+        this.src_ip = src_ip;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public ByteBuf setTimeStamp(Timestamp timeStamp) {
+        Date date = new Date();
+        return Unpooled.copiedBuffer(
+                (CharSequence) (timeStamp = new Timestamp(date.getTime())), Charset.defaultCharset());
+    }
+
+    public void setSend_byte(int send_byte) {
+        this.send_byte = send_byte;
+    }
+
+    public void setReceived_byte(int received_byte) {
+        this.received_byte = received_byte;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+}
